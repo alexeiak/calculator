@@ -1,5 +1,12 @@
 plugins {
+    id 'com.github.ben-manes.versions' version '0.42.0'
+
     id 'java'
+    id 'application'
+
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.1.0'
 }
 
 group 'org.example'
@@ -9,11 +16,33 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+application {
+    mainClass = 'App'
 }
+
+compileJava {
+    options.release = 17
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+    }
+}
+
+testlogger {
+    showStandardStreams true
 }
