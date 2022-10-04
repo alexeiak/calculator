@@ -19,9 +19,4 @@ public class ExpressionHandlerTest {
         assertEquals(2, calculate("(-4)/(-2)"));
         assertEquals(-2, calculate("2+(2*(-4/2))"));
     }
-
-    @Test
-    void wrongInput() {
-
-    }
 }
