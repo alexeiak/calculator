@@ -15,7 +15,9 @@ public class ExpressionHandlerTest {
 
     @Test
     void withNegativeNumber() {
-
+        assertEquals(1, calculate("-1+2"));
+        assertEquals(2, calculate("(-4)/(-2)"));
+        assertEquals(-2, calculate("2+(2*(-4/2))"));
     }
 
     @Test
