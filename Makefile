@@ -15,6 +15,10 @@ run:
 	./gradlew clean
 	./gradlew run
 
+# Execute install tasks + another tasks
+build:
+	./gradlew clean build
+
 # Check code-style
 lint:
 	./gradlew checkstyleMain
@@ -23,9 +27,5 @@ lint:
 # For Jacoco test coverage with CodeClimate in main.yml
 report:
 	./gradlew jacocoTestReport
-
-# Execute install tasks + another tasks
-build:
-	./gradlew clean build
 
 .PHONY: build
