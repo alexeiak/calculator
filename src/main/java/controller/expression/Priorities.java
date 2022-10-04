@@ -1,4 +1,4 @@
-package expression;
+package controller.expression;
 
 public class Priorities {
     public static final int DIGITS_PRIORITY = 0;

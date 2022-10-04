@@ -1,10 +1,6 @@
-package expression;
+package controller.expression;
 
 import java.util.Stack;
-import static expression.Priorities.CLOSE_BRACKET_PRIORITY;
-import static expression.Priorities.DIGITS_PRIORITY;
-import static expression.Priorities.OPEN_BRACKET_PRIORITY;
-import static expression.PriorityDetector.getPriorityOfSymbol;
 
 /*
 * Using Reverse Polish Notation (RPN)
@@ -18,18 +14,18 @@ public class ExpressionParser {
 
         for (int i = 0; i < expression.length(); i++) {
             char symbol = expression.charAt(i);
-            int priority = getPriorityOfSymbol(symbol);
+            int priority = PriorityDetector.getPriorityOfSymbol(symbol);
 
-            if (priority == DIGITS_PRIORITY) {
+            if (priority == Priorities.DIGITS_PRIORITY) {
                 currentSymbol.append(symbol);
             }
-            if (priority == OPEN_BRACKET_PRIORITY) {
+            if (priority == Priorities.OPEN_BRACKET_PRIORITY) {
                 stack.push(symbol);
             }
-            if (priority > OPEN_BRACKET_PRIORITY) {
+            if (priority > Priorities.OPEN_BRACKET_PRIORITY) {
                 currentSymbol.append(NUMBERS_SEPARATOR);
                 while (!stack.empty()) {
-                    if (getPriorityOfSymbol(stack.peek()) >= priority) {
+                    if (PriorityDetector.getPriorityOfSymbol(stack.peek()) >= priority) {
                         currentSymbol.append(stack.pop());
                     } else {
                         break;
@@ -38,9 +34,9 @@ public class ExpressionParser {
                 stack.push(symbol);
             }
 
-            if (priority == CLOSE_BRACKET_PRIORITY) {
+            if (priority == Priorities.CLOSE_BRACKET_PRIORITY) {
                 currentSymbol.append(NUMBERS_SEPARATOR);
-                while (getPriorityOfSymbol(stack.peek()) != OPEN_BRACKET_PRIORITY) {
+                while (PriorityDetector.getPriorityOfSymbol(stack.peek()) != Priorities.OPEN_BRACKET_PRIORITY) {
                     currentSymbol.append(stack.pop());
                 }
                 stack.pop();
@@ -63,11 +59,11 @@ public class ExpressionParser {
             if (rpn.charAt(i) == ' ') {
                 continue;
             }
-            if (getPriorityOfSymbol(rpn.charAt(i)) == DIGITS_PRIORITY) {
+            if (PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) == Priorities.DIGITS_PRIORITY) {
                 operand = new StringBuilder();
 
                 while (!String.valueOf(rpn.charAt(i)).equals(" ")
-                               && getPriorityOfSymbol(rpn.charAt(i)) == DIGITS_PRIORITY) {
+                               && PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) == Priorities.DIGITS_PRIORITY) {
                     operand.append(rpn.charAt(i++));
 
                     if (i == rpn.length()) {
@@ -77,7 +73,7 @@ public class ExpressionParser {
                 stack.push(Double.parseDouble(String.valueOf(operand)));
             }
 
-            if (getPriorityOfSymbol(rpn.charAt(i)) > OPEN_BRACKET_PRIORITY) {
+            if (PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) > Priorities.OPEN_BRACKET_PRIORITY) {
                 double a = stack.pop();
                 double b = stack.pop();
 

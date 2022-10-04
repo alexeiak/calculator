@@ -1,5 +1,9 @@
+import controller.InputHandler;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("\nTest print");
+        String input = Cli.getInput();
+        String command = InputHandler.handle(input);
+        Cli.executeOrPrint(command);
     }
 }

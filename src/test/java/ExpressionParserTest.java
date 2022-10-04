@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import static expression.ExpressionParser.expressionToRpn;
-import static expression.ExpressionParser.rpnToResult;
+import static controller.expression.ExpressionParser.expressionToRpn;
+import static controller.expression.ExpressionParser.rpnToResult;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // @cs-: MagicNumber
@@ -33,15 +33,5 @@ public class ExpressionParserTest {
     void withNestedBrackets() {
         assertEquals(7, rpnToResult(expressionToRpn("1+(10-(2+2))")));
         assertEquals(5, rpnToResult(expressionToRpn("(4-2)/2+(2*(4/2))")));
-    }
-
-    @Test
-    void withNegativeNumber() {
-
-    }
-
-    @Test
-    void wrongInput() {
-
     }
 }

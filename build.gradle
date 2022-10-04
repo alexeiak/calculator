@@ -15,7 +15,7 @@ repositories {
 }
 
 application {
-    mainClass = 'App'
+    mainClass = 'CalculatorApp'
 }
 
 
