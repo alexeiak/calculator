@@ -40,3 +40,7 @@ jacocoTestReport {
 testlogger {
     showStandardStreams true
 }
+
+tasks.withType(Checkstyle) {
+    exclude 'src/test/java'
+}
