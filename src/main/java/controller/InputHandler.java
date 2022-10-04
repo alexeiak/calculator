@@ -1,7 +1,8 @@
 package controller;
 
 public class InputHandler {
-    public static final String HINT_MESSAGE = "Enter digits and math symbols.";
+    public static final String HINT_MESSAGE = "Wrong command :( "
+          + "Enter digits and math symbols.";
 
     public static String handle(String input) {
         if (input.matches(".*[a-zA-Z].*")

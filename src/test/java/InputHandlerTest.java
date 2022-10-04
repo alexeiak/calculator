@@ -17,6 +17,7 @@ public class InputHandlerTest {
         assertEquals(HINT_MESSAGE, handle("  "));
         assertEquals(HINT_MESSAGE, handle("meaningless text"));
         assertEquals(HINT_MESSAGE, handle("5+text"));
+//        assertEquals(HINT_MESSAGE, handle("5")); // TODO
 //        assertEquals(HINT_MESSAGE, handle("5+5;")); // TODO
     }
 }
