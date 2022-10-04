@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class InputHandlerTest {
     @Test
     void correctInput() {
-        assertEquals("1.0", handle("-1+2"));
-        assertEquals("-2.0", handle("2+(2*(-4/2))"));
+        assertEquals("1", handle("-1+2"));
+        assertEquals("-2", handle("2+(2*(-4/2))"));
         assertEquals("4.4", handle("2.2*2"));
     }
 

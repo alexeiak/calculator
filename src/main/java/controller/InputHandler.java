@@ -1,8 +1,10 @@
 package controller;
 
+import static controller.expression.ExpressionPostprocessor.roundIntegeredDouble;
+
 public class InputHandler {
     public static final String HINT_MESSAGE = "Wrong command :( "
-          + "Enter digits and math symbols.";
+          + "Enter a math expression";
 
     public static String handle(String input) {
         if (input.matches(".*[a-zA-Z].*")
@@ -12,7 +14,7 @@ public class InputHandler {
             return HINT_MESSAGE;
         } else {
             double result = ExpressionHandler.calculate(input);
-            return Double.toString(result);
+            return roundIntegeredDouble(result).toString();
         }
     }
 }
