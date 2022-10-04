@@ -4,6 +4,7 @@ import static expression.ExpressionParser.expressionToRpn;
 import static expression.ExpressionParser.rpnToResult;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// @cs-: MagicNumber
 public class ExpressionParserTest {
     @Test
     void basicOperationsWithIntegers() {

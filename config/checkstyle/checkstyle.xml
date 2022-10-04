@@ -121,6 +121,15 @@
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 
+        <!-- Exclude MagicNumber where located this comment:
+        // @cs-: MagicNumber
+        link: https://checkstyle.sourceforge.io/config_filters.html
+        -->
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="@cs-\: ([\w\|]+)"/>
+            <property name="checkFormat" value="$1"/>
+        </module>
+
         <!-- Checks for whitespace                               -->
         <!-- See https://checkstyle.org/config_whitespace.html -->
         <module name="EmptyForIteratorPad"/>

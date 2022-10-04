@@ -18,6 +18,11 @@ run:
 # Check code-style
 lint:
 	./gradlew checkstyleMain
+	./gradlew checkstyleTest
+
+# For Jacoco test coverage with CodeClimate in main.yml
+report:
+	./gradlew jacocoTestReport
 
 # Execute install tasks + another tasks
 build:

@@ -41,6 +41,12 @@ testlogger {
     showStandardStreams true
 }
 
-tasks.withType(Checkstyle) {
-    exclude 'src/test/java'
+checkstyle {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+checkstyleMain {
+    source ='src/main/java'
+}
+checkstyleTest {
+    source ='src/test/java'
 }
