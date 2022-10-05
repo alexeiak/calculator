@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Cli {
     public static String getInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\nEnter the expression: ");
+        System.out.print("\nВведите выражение: ");
 
         return scanner.nextLine();
     }
