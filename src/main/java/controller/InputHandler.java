@@ -8,15 +8,16 @@ public class InputHandler {
     public static final String RESULT_MSG = "Результат: ";
 
     public static String handle(String input) {
-        if (input.matches(".*[a-zA-Zа-яА-я].*")
-                    || input.isEmpty()
-                    || input.startsWith(" ")) {
-            //todo: for signs like ":", "#" and other
-            return HINT_MSG;
-        } else {
+        if (input.matches("[0-9()+-/*]+")
+                    && !input.matches("^\\D*[0-9]*$")
+                    && !input.matches("^[0-9]+\\D+$")) {
+
             double result = ExpressionHandler.calculate(input);
             String output = roundIntegeredDouble(result).toString();
             return RESULT_MSG + output;
+        } else {
+            return HINT_MSG;
         }
+
     }
 }

@@ -16,9 +16,14 @@ public class InputHandlerTest {
     @Test
     void wrongInput() {
         assertEquals(HINT_MSG, handle("  "));
-        assertEquals(HINT_MSG, handle("meaningless text"));
         assertEquals(HINT_MSG, handle("5+text"));
-//        assertEquals(HINT_MESSAGE, handle("5")); // TODO
-//        assertEquals(HINT_MESSAGE, handle("5+5;")); // TODO
+        assertEquals(HINT_MSG, handle("meaningless text"));
+        assertEquals(HINT_MSG, handle("t"));
+        assertEquals(HINT_MSG, handle("5"));
+        assertEquals(HINT_MSG, handle("5+"));
+        assertEquals(HINT_MSG, handle("+5"));
+        assertEquals(HINT_MSG, handle("+55"));
+        assertEquals(HINT_MSG, handle("++"));
+        assertEquals(HINT_MSG, handle("5+5;"));
     }
 }
