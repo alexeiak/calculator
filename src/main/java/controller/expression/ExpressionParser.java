@@ -2,70 +2,70 @@ package controller.expression;
 
 import java.util.Stack;
 
+import static controller.expression.Priorities.CLOSE_BRACKET_PRIORITY;
+import static controller.expression.Priorities.DIGITS_PRIORITY;
+import static controller.expression.Priorities.OPEN_BRACKET_PRIORITY;
+import static controller.expression.PriorityDetector.getPriorityOfSign;
+
 /*
 * Using Reverse Polish Notation (RPN)
 * */
 public class ExpressionParser {
-    private static final String NUMBERS_SEPARATOR = " ";
+    static final String NUMBERS_STRING_SEPARATOR = " ";
+    static final char NUMBERS_CHAR_SEPARATOR = ' ';
 
     public static String expressionToRpn(String expression) {
-        StringBuilder currentSymbol = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        StringBuilder currentSign = new StringBuilder();
+        Stack<Character> signs = new Stack<>();
 
         for (int i = 0; i < expression.length(); i++) {
-            char symbol = expression.charAt(i);
-            int priority = PriorityDetector.getPriorityOfSymbol(symbol);
+            char sign = expression.charAt(i);
+            int signPriority = getPriorityOfSign(sign);
 
-            if (priority == Priorities.DIGITS_PRIORITY) {
-                currentSymbol.append(symbol);
+            if (signPriority == DIGITS_PRIORITY) {
+                currentSign.append(sign);
             }
-            if (priority == Priorities.OPEN_BRACKET_PRIORITY) {
-                stack.push(symbol);
+            if (signPriority == OPEN_BRACKET_PRIORITY) {
+                signs.push(sign);
             }
-            if (priority > Priorities.OPEN_BRACKET_PRIORITY) {
-                currentSymbol.append(NUMBERS_SEPARATOR);
-                while (!stack.empty()) {
-                    if (PriorityDetector.getPriorityOfSymbol(stack.peek()) >= priority) {
-                        currentSymbol.append(stack.pop());
-                    } else {
-                        break;
-                    }
+            //todo: refactor
+            if (signPriority > OPEN_BRACKET_PRIORITY) {
+                currentSign.append(NUMBERS_STRING_SEPARATOR);
+                if (!signs.empty()) {
+                    currentSign.append(getCharHavingHigherPriority(signPriority, signs));
                 }
-                stack.push(symbol);
+                signs.push(sign);
             }
-
-            if (priority == Priorities.CLOSE_BRACKET_PRIORITY) {
-                currentSymbol.append(NUMBERS_SEPARATOR);
-                while (PriorityDetector.getPriorityOfSymbol(stack.peek()) != Priorities.OPEN_BRACKET_PRIORITY) {
-                    currentSymbol.append(stack.pop());
+            if (signPriority == CLOSE_BRACKET_PRIORITY) {
+                currentSign.append(NUMBERS_STRING_SEPARATOR);
+                while (getPriorityOfSign(signs.peek()) != OPEN_BRACKET_PRIORITY) {
+                    currentSign.append(signs.pop());
                 }
-                stack.pop();
+                signs.pop();
             }
         }
 
-        while (!stack.empty()) {
-            currentSymbol.append(stack.pop());
+        while (!signs.empty()) {
+            currentSign.append(signs.pop());
         }
-
-        return currentSymbol.toString();
+        return currentSign.toString();
     }
-
 
     public static double rpnToResult(String rpn) {
         StringBuilder operand;
         Stack<Double> stack = new Stack<>();
 
         for (int i = 0; i < rpn.length(); i++) {
-            if (rpn.charAt(i) == ' ') {
+            if (rpn.charAt(i) == NUMBERS_CHAR_SEPARATOR) {
                 continue;
             }
-            if (PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) == Priorities.DIGITS_PRIORITY) {
+
+            //todo: refactor
+            if (getPriorityOfSign(rpn.charAt(i)) == DIGITS_PRIORITY) {
                 operand = new StringBuilder();
 
-                while (!String.valueOf(rpn.charAt(i)).equals(" ")
-                               && PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) == Priorities.DIGITS_PRIORITY) {
+                while (rpn.charAt(i) != NUMBERS_CHAR_SEPARATOR && getPriorityOfSign(rpn.charAt(i)) == DIGITS_PRIORITY) {
                     operand.append(rpn.charAt(i++));
-
                     if (i == rpn.length()) {
                         break;
                     }
@@ -73,7 +73,7 @@ public class ExpressionParser {
                 stack.push(Double.parseDouble(String.valueOf(operand)));
             }
 
-            if (PriorityDetector.getPriorityOfSymbol(rpn.charAt(i)) > Priorities.OPEN_BRACKET_PRIORITY) {
+            if (getPriorityOfSign(rpn.charAt(i)) > OPEN_BRACKET_PRIORITY) {
                 double a = stack.pop();
                 double b = stack.pop();
 
@@ -90,4 +90,11 @@ public class ExpressionParser {
         return stack.pop();
     }
 
+
+    static char getCharHavingHigherPriority(int signPriority, Stack<Character> signs) {
+        if (getPriorityOfSign(signs.peek()) >= signPriority) {
+            return signs.pop();
+        }
+        return '\u0000'; // empty char
+    }
 }

@@ -11,7 +11,7 @@ public class InputHandler {
         if (input.matches(".*[a-zA-Zа-яА-я].*")
                     || input.isEmpty()
                     || input.startsWith(" ")) {
-            // TODO for symbols like ":", "#" and other
+            //todo: for signs like ":", "#" and other
             return HINT_MSG;
         } else {
             double result = ExpressionHandler.calculate(input);
