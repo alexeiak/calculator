@@ -1,6 +1,6 @@
 package controller;
 
-import static controller.expression.ExpressionPostprocessor.roundIntegeredDouble;
+import static controller.ExpressionHandler.roundIntegeredDouble;
 
 public class InputHandler {
     public static final String HINT_MSG = "Неверная команда :( "
