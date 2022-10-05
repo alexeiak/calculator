@@ -4,7 +4,12 @@ install:
 
 # Run executable file (do this after install)
 run-dist:
-	./build/install/app/bin/app
+	./build/install/calculator/bin/calculator
+
+# Use programm in CLI
+calc:
+	./gradlew clean install
+	./build/install/calculator/bin/calculator
 
 # Check updates for dependencies (libraries; plugins from build.gradle)
 check-updates:
