@@ -1,20 +1,26 @@
 package controller.expression;
 
+import static controller.expression.Priorities.CLOSE_BRACKET_PRIORITY;
+import static controller.expression.Priorities.DIGITS_PRIORITY;
+import static controller.expression.Priorities.MULT_DIV_PRIORITY;
+import static controller.expression.Priorities.OPEN_BRACKET_PRIORITY;
+import static controller.expression.Priorities.SUM_SUBTR_PRIORITY;
+
 public class PriorityDetector {
     public static int getPriorityOfSign(char sign) {
         if (sign == '*' || sign == '/') {
-            return Priorities.MULT_DIV_PRIORITY;
+            return MULT_DIV_PRIORITY;
         }
         if (sign == '+' || sign == '-') {
-            return Priorities.SUM_SUBTR_PRIORITY;
+            return SUM_SUBTR_PRIORITY;
         }
         if (sign == '(') {
-            return Priorities.OPEN_BRACKET_PRIORITY;
+            return OPEN_BRACKET_PRIORITY;
         }
         if (sign == ')') {
-            return Priorities.CLOSE_BRACKET_PRIORITY;
+            return CLOSE_BRACKET_PRIORITY;
         } else {
-            return Priorities.DIGITS_PRIORITY;
+            return DIGITS_PRIORITY;
         }
     }
 }

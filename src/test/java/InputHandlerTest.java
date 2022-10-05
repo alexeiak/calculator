@@ -9,8 +9,10 @@ public class InputHandlerTest {
     @Test
     void correctInput() {
         assertEquals(RESULT_MSG + "1", handle("-1+2"));
-        assertEquals(RESULT_MSG + "-2", handle("2+(2*(-4/2))"));
+        assertEquals(RESULT_MSG + "7", handle("1+(10-(2+2))"));
         assertEquals(RESULT_MSG + "4.4", handle("2.2*2"));
+        assertEquals(RESULT_MSG + "1", handle("(4-2)/2"));
+        assertEquals(RESULT_MSG + "-2", handle("2+(2*(-4/2))"));
     }
 
     @Test

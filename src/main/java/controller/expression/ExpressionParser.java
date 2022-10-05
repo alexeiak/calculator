@@ -5,96 +5,104 @@ import java.util.Stack;
 import static controller.expression.Priorities.CLOSE_BRACKET_PRIORITY;
 import static controller.expression.Priorities.DIGITS_PRIORITY;
 import static controller.expression.Priorities.OPEN_BRACKET_PRIORITY;
+import static controller.expression.Priorities.SUM_SUBTR_PRIORITY;
 import static controller.expression.PriorityDetector.getPriorityOfSign;
 
-/*
-* Using Reverse Polish Notation (RPN)
-* */
+// Using Reverse Polish Notation (RPN)
 public class ExpressionParser {
-    static final String NUMBERS_STRING_SEPARATOR = " ";
-    static final char NUMBERS_CHAR_SEPARATOR = ' ';
+    static final char NUMBERS_SEPARATOR = ' ';
 
     public static String expressionToRpn(String expression) {
-        StringBuilder currentSign = new StringBuilder();
-        Stack<Character> signs = new Stack<>();
+        StringBuilder rpnExpression = new StringBuilder();
+        Stack<Character> operators = new Stack<>();
 
         for (int i = 0; i < expression.length(); i++) {
             char sign = expression.charAt(i);
             int signPriority = getPriorityOfSign(sign);
 
             if (signPriority == DIGITS_PRIORITY) {
-                currentSign.append(sign);
+                rpnExpression.append(sign);
             }
             if (signPriority == OPEN_BRACKET_PRIORITY) {
-                signs.push(sign);
-            }
-            //todo: refactor
-            if (signPriority > OPEN_BRACKET_PRIORITY) {
-                currentSign.append(NUMBERS_STRING_SEPARATOR);
-                if (!signs.empty()) {
-                    currentSign.append(getCharHavingHigherPriority(signPriority, signs));
-                }
-                signs.push(sign);
+                operators.push(sign);
             }
             if (signPriority == CLOSE_BRACKET_PRIORITY) {
-                currentSign.append(NUMBERS_STRING_SEPARATOR);
-                while (getPriorityOfSign(signs.peek()) != OPEN_BRACKET_PRIORITY) {
-                    currentSign.append(signs.pop());
-                }
-                signs.pop();
+                rpnExpression.append(NUMBERS_SEPARATOR);
+                rpnExpression.append(getOperator(operators));
+                operators.pop();
+            }
+            if (signPriority >= SUM_SUBTR_PRIORITY) {
+                rpnExpression.append(NUMBERS_SEPARATOR);
+                rpnExpression.append(getOperand(signPriority, operators));
+                operators.push(sign);
             }
         }
 
-        while (!signs.empty()) {
-            currentSign.append(signs.pop());
+        while (!operators.empty()) {
+            rpnExpression.append(operators.pop());
         }
-        return currentSign.toString();
+        return rpnExpression.toString();
     }
 
+
     public static double rpnToResult(String rpn) {
-        StringBuilder operand;
-        Stack<Double> stack = new Stack<>();
+        Stack<Double> cumulativeOperands = new Stack<>();
 
         for (int i = 0; i < rpn.length(); i++) {
-            if (rpn.charAt(i) == NUMBERS_CHAR_SEPARATOR) {
+            if (rpn.charAt(i) == NUMBERS_SEPARATOR) {
                 continue;
             }
 
-            //todo: refactor
             if (getPriorityOfSign(rpn.charAt(i)) == DIGITS_PRIORITY) {
-                operand = new StringBuilder();
+                StringBuilder operand = new StringBuilder();
 
-                while (rpn.charAt(i) != NUMBERS_CHAR_SEPARATOR && getPriorityOfSign(rpn.charAt(i)) == DIGITS_PRIORITY) {
+                while (rpn.charAt(i) != NUMBERS_SEPARATOR && getPriorityOfSign(rpn.charAt(i)) == DIGITS_PRIORITY) {
                     operand.append(rpn.charAt(i++));
-                    if (i == rpn.length()) {
-                        break;
-                    }
                 }
-                stack.push(Double.parseDouble(String.valueOf(operand)));
+                cumulativeOperands.push(Double.parseDouble(String.valueOf(operand)));
             }
 
-            if (getPriorityOfSign(rpn.charAt(i)) > OPEN_BRACKET_PRIORITY) {
-                double a = stack.pop();
-                double b = stack.pop();
-
-                switch (rpn.charAt(i)) {
-                    case '+' -> stack.push(b + a);
-                    case '-' -> stack.push(b - a);
-                    case '*' -> stack.push(b * a);
-                    case '/' -> stack.push(b / a);
-                    default ->  throw new Error("Unknown math operation");
-                }
+            if (getPriorityOfSign(rpn.charAt(i)) >= SUM_SUBTR_PRIORITY) {
+                double a = cumulativeOperands.pop();
+                double b = cumulativeOperands.pop();
+                cumulativeOperands.push(executeOperation(rpn.charAt(i), a, b));
             }
         }
-
-        return stack.pop();
+        return cumulativeOperands.pop();
     }
 
 
-    static char getCharHavingHigherPriority(int signPriority, Stack<Character> signs) {
-        if (getPriorityOfSign(signs.peek()) >= signPriority) {
-            return signs.pop();
+    private static StringBuilder getOperand(int signPriority, Stack<Character> signs) {
+        StringBuilder operand = new StringBuilder();
+        while (!signs.empty() && getPriorityOfSign(signs.peek()) >= signPriority) {
+            operand.append(signs.pop());
         }
-        return '\u0000'; // empty char
+        return operand;
+    }
+
+    private static StringBuilder getOperator(Stack<Character> operators) {
+        StringBuilder operator = new StringBuilder();
+        while (getPriorityOfSign(operators.peek()) != OPEN_BRACKET_PRIORITY) {
+            operator.append(operators.pop());
+        }
+        return operator;
+    }
+
+    private static double executeOperation(char operator, double a, double b) {
+        switch (operator) {
+            case '+' -> {
+                return b + a;
+            }
+            case '-' -> {
+                return b - a;
+            }
+            case '*' -> {
+                return b * a;
+            }
+            case '/' -> {
+                return b / a;
+            }
+            default -> throw new Error("Unknown math operation");
+        }
     }
 }
