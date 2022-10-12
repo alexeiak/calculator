@@ -18,5 +18,4 @@ public class InputHandler {
             return HINT_MSG;
         }
     }
-
 }

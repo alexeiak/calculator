@@ -2,8 +2,8 @@ package controller;
 
 import java.util.Stack;
 
-import static controller.expression.Priorities.DIGITS_PRIORITY;
-import static controller.expression.Priorities.SUM_SUBTR_PRIORITY;
+import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
+import static controller.expression.PriorityDetector.SUM_SUBTR_PRIORITY;
 import static controller.expression.PriorityDetector.getPriorityOfSign;
 
 public class Calculator {

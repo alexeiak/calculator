@@ -2,10 +2,10 @@ package controller.expression;
 
 import java.util.Stack;
 
-import static controller.expression.Priorities.CLOSE_BRACKET_PRIORITY;
-import static controller.expression.Priorities.DIGITS_PRIORITY;
-import static controller.expression.Priorities.OPEN_BRACKET_PRIORITY;
-import static controller.expression.Priorities.SUM_SUBTR_PRIORITY;
+import static controller.expression.PriorityDetector.CLOSE_BRACKET_PRIORITY;
+import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
+import static controller.expression.PriorityDetector.OPEN_BRACKET_PRIORITY;
+import static controller.expression.PriorityDetector.SUM_SUBTR_PRIORITY;
 import static controller.expression.PriorityDetector.getPriorityOfSign;
 
 // Using Reverse Polish Notation (RPN)
