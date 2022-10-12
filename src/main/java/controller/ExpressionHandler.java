@@ -4,38 +4,28 @@ import controller.expression.ExpressionParser;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import static controller.expression.ExpressionParser.expressionToRpn;
+
+import static controller.Calculator.calculate;
 
 public class ExpressionHandler {
-    public static double calculate(String expression) {
-        String preparedExpression = Stream.of(expression)
-            .map(ExpressionHandler::prepareExprWithNegativeNumbers)
-            .map(exprsn -> exprsn.replaceAll("\\s+", ""))
-            .collect(Collectors.joining());
+    public static String getPreparedResult(String expression) {
+        String preparedExpression = getPreparedExpression(expression);
+        String parsedExpression = Stream.of(preparedExpression)
+                                          .map(ExpressionParser::parseExprWithNegativeNumbers)
+                                          .map(ExpressionParser::expressionToRpn)
+                                          .collect(Collectors.joining());
+        double result = calculate(parsedExpression);
 
-        String rpn = expressionToRpn(preparedExpression);
-        return ExpressionParser.rpnToResult(rpn);
+        return roundIntegeredDouble(result).toString();
     }
 
-    private static String prepareExprWithNegativeNumbers(String expression) {
-        StringBuilder preparedExpression = new StringBuilder();
 
-        for (int i = 0; i < expression.length(); i++) {
-            char currentSign = expression.charAt(i);
-
-            if (currentSign == '-' && i == 0) {
-                preparedExpression.append("0");
-            } else if (currentSign == '-' && expression.charAt(i - 1) == '(') {
-                preparedExpression.append("0");
-            }
-            preparedExpression.append(currentSign);
-        }
-
-        return preparedExpression.toString();
+    private static String getPreparedExpression(String expression) {
+        return expression.replaceAll("\\s+", "");
     }
 
-    public static Object roundIntegeredDouble(double result) {
-        if (String.valueOf(result).matches(".*.0$")) {
+    private static Object roundIntegeredDouble(double result) {
+        if (result % 1.0 == 0.0) {
             return (int) result;
         } else {
             return result;

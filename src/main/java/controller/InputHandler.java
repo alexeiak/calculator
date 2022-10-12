@@ -1,10 +1,10 @@
 package controller;
 
-import static controller.ExpressionHandler.roundIntegeredDouble;
+import static controller.ExpressionHandler.getPreparedResult;
 
 public class InputHandler {
     public static final String HINT_MSG = "Неверная команда :( "
-          + "Используйте цифры и знаки +, -, /, *.";
+          + "Используйте цифры и операции";
     public static final String RESULT_MSG = "Результат: ";
 
     public static String handle(String input) {
@@ -12,12 +12,11 @@ public class InputHandler {
                     && !input.matches("^\\D*[0-9]*$")
                     && !input.matches("^[0-9]+\\D+$")) {
 
-            double result = ExpressionHandler.calculate(input);
-            String output = roundIntegeredDouble(result).toString();
-            return RESULT_MSG + output;
+            String preparedResultOfExpression = getPreparedResult(input);
+            return RESULT_MSG + preparedResultOfExpression;
         } else {
             return HINT_MSG;
         }
-
     }
+
 }
