@@ -1,15 +1,19 @@
 package controller;
 
+import model.Operation;
+import controller.expression.PriorityDetector;
 import java.util.Stack;
 
 import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
-import static controller.expression.PriorityDetector.SUM_SUBTR_PRIORITY;
+import static controller.expression.PriorityDetector.OPEN_BRACKET_PRIORITY;
 import static controller.expression.PriorityDetector.getPriorityOfSign;
+import static controller.expression.PriorityDetector.installOperations;
 
 public class Calculator {
     static final char NUMBERS_SEPARATOR = ' ';
 
     public static double calculate(String rpn) {
+        installOperations();
         Stack<Double> cumulativeOperands = new Stack<>();
 
         for (int i = 0; i < rpn.length(); i++) {
@@ -26,7 +30,7 @@ public class Calculator {
                 cumulativeOperands.push(Double.parseDouble(String.valueOf(operand)));
             }
 
-            if (getPriorityOfSign(rpn.charAt(i)) >= SUM_SUBTR_PRIORITY) {
+            if (getPriorityOfSign(rpn.charAt(i)) > OPEN_BRACKET_PRIORITY) {
                 double a = cumulativeOperands.pop();
                 double b = cumulativeOperands.pop();
                 cumulativeOperands.push(executeOperation(rpn.charAt(i), a, b));
@@ -36,20 +40,13 @@ public class Calculator {
     }
 
     private static double executeOperation(char operator, double a, double b) {
-        switch (operator) {
-            case '+' -> {
-                return b + a;
+        double result = 0;
+
+        for (Operation operation : PriorityDetector.getOperations()) {
+            if (operator == operation.getSign()) {
+                result = operation.execute(a, b);
             }
-            case '-' -> {
-                return b - a;
-            }
-            case '*' -> {
-                return b * a;
-            }
-            case '/' -> {
-                return b / a;
-            }
-            default -> throw new Error("Unknown math operation");
         }
+        return result;
     }
 }

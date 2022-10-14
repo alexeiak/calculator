@@ -1,4 +1,3 @@
-### Tests and linter status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/8b2563e37190dd8e9ce4/maintainability)](https://codeclimate.com/github/alexeiak/calculator/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8b2563e37190dd8e9ce4/test_coverage)](https://codeclimate.com/github/alexeiak/calculator/test_coverage)
 

@@ -3,9 +3,8 @@ package controller.expression;
 import java.util.Stack;
 
 import static controller.expression.PriorityDetector.CLOSE_BRACKET_PRIORITY;
-import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
 import static controller.expression.PriorityDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.PriorityDetector.SUM_SUBTR_PRIORITY;
+import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
 import static controller.expression.PriorityDetector.getPriorityOfSign;
 
 // Using Reverse Polish Notation (RPN)
@@ -48,7 +47,7 @@ public class ExpressionParser {
                 rpnExpression.append(getOperator(operators));
                 operators.pop();
             }
-            if (signPriority >= SUM_SUBTR_PRIORITY) {
+            if (signPriority > OPEN_BRACKET_PRIORITY) {
                 rpnExpression.append(NUMBERS_SEPARATOR);
                 rpnExpression.append(getOperand(signPriority, operators));
                 operators.push(sign);

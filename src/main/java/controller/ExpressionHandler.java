@@ -18,7 +18,6 @@ public class ExpressionHandler {
         return roundIntegeredDouble(result).toString();
     }
 
-
     private static String getPreparedExpression(String expression) {
         return Stream.of(expression)
                        .map(expr -> expression.replaceAll("\\s+", ""))
