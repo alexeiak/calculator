@@ -1,8 +1,8 @@
 package controller;
 
-import controller.expression.PriorityDetector;
-import model.Operation;
 
+import controller.expression.OperationDetector;
+import controller.expression.Operation;
 import static controller.ExpressionHandler.getPreparedResult;
 
 public class InputHandler {
@@ -11,7 +11,7 @@ public class InputHandler {
     public static final String RESULT_MSG = "Результат: ";
 
     public static String handle(String input) {
-        if (hasAnyOperator(input)
+        if (hasAnyOperatorFromOperationDetector(input)
                     && !input.matches("^\\D*[0-9]*$")
                     && !input.matches("^[0-9]+\\D+$")) {
 
@@ -22,19 +22,15 @@ public class InputHandler {
         }
     }
 
-    private static boolean hasAnyOperator(String input) {
-        int operationsSizeCounter = 0;
+
+    private static boolean hasAnyOperatorFromOperationDetector(String input) {
         int operatorMatching = 0;
 
-        for (Operation operation : PriorityDetector.getOperations()) {
+        for (Operation operation : OperationDetector.getOperations()) {
             if (input.contains(String.valueOf(operation.getSign()))) {
                 operatorMatching++;
                 break;
             }
-            if (operationsSizeCounter == PriorityDetector.getOperations().size()) {
-                break;
-            }
-            operationsSizeCounter++;
         }
         return operatorMatching > 0;
     }

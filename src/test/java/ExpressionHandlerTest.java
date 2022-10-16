@@ -1,9 +1,16 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static controller.ExpressionHandler.getPreparedResult;
+import static controller.expression.OperationDetector.installOperations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExpressionHandlerTest {
+    @BeforeAll
+    static void installPrior() {
+        installOperations();
+    }
+
     @Test
     void basicOperationsWithIntegers() {
         assertEquals("0", getPreparedResult("1+2-3"));

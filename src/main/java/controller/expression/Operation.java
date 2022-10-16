@@ -1,4 +1,4 @@
-package model;
+package controller.expression;
 
 public abstract class Operation {
     private final int priority;

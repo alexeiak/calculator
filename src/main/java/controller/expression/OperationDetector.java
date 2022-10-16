@@ -1,11 +1,9 @@
 package controller.expression;
 
-import model.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriorityDetector {
+public class OperationDetector {
     public static final int MULT_DIV_PRIORITY = 3;
     public static final int SUM_SUBTR_PRIORITY = 2;
 
@@ -45,7 +43,7 @@ public class PriorityDetector {
     public static int getPriorityOfSign(char sign) {
         int priority = DIGITS_PRIORITY;
 
-        for (Operation operation : PriorityDetector.getOperations()) {
+        for (Operation operation : OperationDetector.getOperations()) {
             if (sign == operation.getSign()) {
                 priority = operation.getPriority();
             }

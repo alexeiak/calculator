@@ -2,10 +2,10 @@ package controller.expression;
 
 import java.util.Stack;
 
-import static controller.expression.PriorityDetector.CLOSE_BRACKET_PRIORITY;
-import static controller.expression.PriorityDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
-import static controller.expression.PriorityDetector.getPriorityOfSign;
+import static controller.expression.OperationDetector.CLOSE_BRACKET_PRIORITY;
+import static controller.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
+import static controller.expression.OperationDetector.DIGITS_PRIORITY;
+import static controller.expression.OperationDetector.getPriorityOfSign;
 
 // Using Reverse Polish Notation (RPN)
 public class ExpressionParser {

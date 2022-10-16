@@ -1,19 +1,17 @@
 package controller;
 
-import model.Operation;
-import controller.expression.PriorityDetector;
+import controller.expression.Operation;
+import controller.expression.OperationDetector;
 import java.util.Stack;
 
-import static controller.expression.PriorityDetector.DIGITS_PRIORITY;
-import static controller.expression.PriorityDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.PriorityDetector.getPriorityOfSign;
-import static controller.expression.PriorityDetector.installOperations;
+import static controller.expression.OperationDetector.DIGITS_PRIORITY;
+import static controller.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
+import static controller.expression.OperationDetector.getPriorityOfSign;
 
 public class Calculator {
     static final char NUMBERS_SEPARATOR = ' ';
 
     public static double calculate(String rpn) {
-        installOperations();
         Stack<Double> cumulativeOperands = new Stack<>();
 
         for (int i = 0; i < rpn.length(); i++) {
@@ -42,7 +40,7 @@ public class Calculator {
     private static double executeOperation(char operator, double a, double b) {
         double result = 0;
 
-        for (Operation operation : PriorityDetector.getOperations()) {
+        for (Operation operation : OperationDetector.getOperations()) {
             if (operator == operation.getSign()) {
                 result = operation.execute(a, b);
             }
