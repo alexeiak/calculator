@@ -1,16 +1,8 @@
 package controller.expression;
 
-import java.util.Stack;
+import static controller.expression.NumeralParser.romanNumeralToArabic;
 
-import static controller.expression.OperationDetector.CLOSE_BRACKET_PRIORITY;
-import static controller.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.OperationDetector.DIGITS_PRIORITY;
-import static controller.expression.OperationDetector.getPriorityOfSign;
-
-// Using Reverse Polish Notation (RPN)
 public class ExpressionParser {
-    static final char NUMBERS_SEPARATOR = ' ';
-
     public static String parseExprWithNegativeNumbers(String expression) {
         StringBuilder preparedExpression = new StringBuilder();
 
@@ -22,60 +14,39 @@ public class ExpressionParser {
             } else if (currentSign == '-' && expression.charAt(i - 1) == '(') {
                 preparedExpression.append("0");
             }
+
             preparedExpression.append(currentSign);
         }
-
         return preparedExpression.toString();
     }
 
-    public static String expressionToRpn(String expression) {
-        StringBuilder rpnExpression = new StringBuilder();
-        Stack<Character> operators = new Stack<>();
+	public static String parseExprWithRomanNumerals(String expression) {
+		StringBuilder preparedExpression = new StringBuilder();
+		StringBuilder currentRomanNumeral = new StringBuilder();
+		String currentArabicNumeral;
 
-        for (int i = 0; i < expression.length(); i++) {
-            char sign = expression.charAt(i);
-            int signPriority = getPriorityOfSign(sign);
+		for (int i = 0; i < expression.length(); i++) {
+			char currentSign = expression.charAt(i);
 
-            if (signPriority == DIGITS_PRIORITY) {
-                rpnExpression.append(sign);
-            }
-            if (signPriority == OPEN_BRACKET_PRIORITY) {
-                operators.push(sign);
-            }
-            if (signPriority == CLOSE_BRACKET_PRIORITY) {
-                rpnExpression.append(NUMBERS_SEPARATOR);
-                rpnExpression.append(getOperator(operators));
-                operators.pop();
-            }
-            if (signPriority > OPEN_BRACKET_PRIORITY) {
-                rpnExpression.append(NUMBERS_SEPARATOR);
-                rpnExpression.append(getOperand(signPriority, operators));
-                operators.push(sign);
-            }
-        }
+			if (i == expression.length() - 1) {
+				currentRomanNumeral.append(currentSign);
 
-        while (!operators.empty()) {
-            rpnExpression.append(NUMBERS_SEPARATOR);
-            rpnExpression.append(operators.pop());
-        }
-        return rpnExpression.toString();
-    }
+				currentArabicNumeral = romanNumeralToArabic(String.valueOf(currentRomanNumeral));
 
+				preparedExpression.append(currentArabicNumeral);
+			}
+			if (!Character.isLetter(currentSign)) {
+				currentArabicNumeral = romanNumeralToArabic(String.valueOf(currentRomanNumeral));
 
-    private static StringBuilder getOperand(int signPriority, Stack<Character> signs) {
-        StringBuilder operand = new StringBuilder();
-        while (!signs.empty() && getPriorityOfSign(signs.peek()) >= signPriority) {
-            operand.append(signs.pop());
-            operand.append(NUMBERS_SEPARATOR);
-        }
-        return operand;
-    }
+				preparedExpression.append(currentArabicNumeral);
+				preparedExpression.append(currentSign);
 
-    private static StringBuilder getOperator(Stack<Character> operators) {
-        StringBuilder operator = new StringBuilder();
-        while (getPriorityOfSign(operators.peek()) != OPEN_BRACKET_PRIORITY) {
-            operator.append(operators.pop());
-        }
-        return operator;
-    }
+				currentRomanNumeral.setLength(0);
+			} else {
+				currentRomanNumeral.append(currentSign);
+			}
+		}
+
+		return preparedExpression.toString();
+	}
 }

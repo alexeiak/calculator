@@ -11,6 +11,7 @@ import static controller.expression.OperationDetector.getPriorityOfSign;
 public class Calculator {
     static final char NUMBERS_SEPARATOR = ' ';
 
+	// Using Reverse Polish Notation (RPN)
     public static double calculate(String rpn) {
         Stack<Double> cumulativeOperands = new Stack<>();
 

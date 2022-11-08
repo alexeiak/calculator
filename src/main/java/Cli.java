@@ -18,7 +18,6 @@ public class Cli {
         System.out.print("\nВведите выражение: ");
 
         String input = scanner.nextLine();
-        scanner.close();
         return input;
     }
 }

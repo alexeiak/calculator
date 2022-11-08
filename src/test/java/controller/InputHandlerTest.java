@@ -1,3 +1,5 @@
+package controller;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +24,24 @@ public class InputHandlerTest {
         assertEquals(RESULT_MSG + "-2", handle("2+(2*(-4/2))"));
     }
 
+	@Test
+	void inputWithComma() {
+		assertEquals(RESULT_MSG + "4.4", handle("2,2*2"));
+	}
+
+	@Test
+	void inputWithOnlyRomanNumerals() {
+		assertEquals(RESULT_MSG + "I", handle("II-I"));
+		assertEquals(RESULT_MSG + "III", handle("I+II"));
+		assertEquals(RESULT_MSG + "II", handle("IV / II"));
+		assertEquals(RESULT_MSG + "LX", handle("X * VI"));
+	}
+
     @Test
     void wrongInput() {
+	    assertEquals(HINT_MSG, handle("I + 1"));
+	    assertEquals(HINT_MSG, handle("II"));
+
         assertEquals(HINT_MSG, handle("  "));
         assertEquals(HINT_MSG, handle("5+text"));
         assertEquals(HINT_MSG, handle("meaningless text"));

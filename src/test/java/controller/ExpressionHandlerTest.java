@@ -1,3 +1,5 @@
+package controller;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,6 @@ public class ExpressionHandlerTest {
     @Test
     void basicOperationsWithLongs() {
         assertEquals("4.4", getPreparedResult("2.2*2"));
-        assertEquals("4.4", getPreparedResult("2,2*2"));
         assertEquals("4.5", getPreparedResult("9/2"));
     }
 
