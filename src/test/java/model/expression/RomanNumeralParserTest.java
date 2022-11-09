@@ -1,9 +1,9 @@
-package controller.expression;
+package model.expression;
 
 import org.junit.jupiter.api.Test;
 
-import static controller.expression.RomanNumeralParser.arabicNumeralToRoman;
-import static controller.expression.RomanNumeralParser.romanNumeralToArabic;
+import static model.expression.RomanNumeralParser.arabicNumeralToRoman;
+import static model.expression.RomanNumeralParser.romanNumeralToArabic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RomanNumeralParserTest {

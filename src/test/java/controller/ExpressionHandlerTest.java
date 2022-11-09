@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static controller.ExpressionHandler.getPreparedResult;
-import static controller.expression.OperationDetector.installOperations;
+import static model.expression.OperationDetector.installOperations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExpressionHandlerTest {

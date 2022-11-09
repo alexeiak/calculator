@@ -1,8 +1,8 @@
-package controller.expression;
+package model.expression;
 
 import org.junit.jupiter.api.Test;
 
-import static controller.expression.RpnExpressionParser.expressionToRpn;
+import static model.expression.RpnExpressionParser.expressionToRpn;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RpnExpressionParserTest {

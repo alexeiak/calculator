@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static controller.InputHandler.HINT_MSG;
 import static controller.InputHandler.RESULT_MSG;
 import static controller.InputHandler.handle;
-import static controller.expression.OperationDetector.installOperations;
+import static model.expression.OperationDetector.installOperations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputHandlerTest {

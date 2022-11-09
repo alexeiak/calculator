@@ -1,12 +1,12 @@
-package controller;
+package model;
 
-import controller.expression.Operation;
-import controller.expression.OperationDetector;
+import model.expression.Operation;
+import model.expression.OperationDetector;
 import java.util.Stack;
 
-import static controller.expression.OperationDetector.DIGITS_PRIORITY;
-import static controller.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.OperationDetector.getPriorityOfSign;
+import static model.expression.OperationDetector.DIGITS_PRIORITY;
+import static model.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
+import static model.expression.OperationDetector.getPriorityOfSign;
 
 public class Calculator {
     static final char NUMBERS_SEPARATOR = ' ';

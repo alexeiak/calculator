@@ -1,10 +1,10 @@
-package controller;
+package model;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static controller.Calculator.calculate;
-import static controller.expression.OperationDetector.installOperations;
+import static model.Calculator.calculate;
+import static model.expression.OperationDetector.installOperations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // @cs-: MagicNumber

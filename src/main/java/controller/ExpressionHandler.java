@@ -3,10 +3,10 @@ package controller;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import controller.expression.ExpressionParser;
-import controller.expression.RpnExpressionParser;
+import model.expression.ExpressionParser;
+import model.expression.RpnExpressionParser;
 
-import static controller.Calculator.calculate;
+import static model.Calculator.calculate;
 
 public class ExpressionHandler {
     public static String getPreparedResult(String expression) {

@@ -1,11 +1,11 @@
-package controller.expression;
+package model.expression;
 
 import java.util.Stack;
 
-import static controller.expression.OperationDetector.CLOSE_BRACKET_PRIORITY;
-import static controller.expression.OperationDetector.DIGITS_PRIORITY;
-import static controller.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
-import static controller.expression.OperationDetector.getPriorityOfSign;
+import static model.expression.OperationDetector.CLOSE_BRACKET_PRIORITY;
+import static model.expression.OperationDetector.DIGITS_PRIORITY;
+import static model.expression.OperationDetector.OPEN_BRACKET_PRIORITY;
+import static model.expression.OperationDetector.getPriorityOfSign;
 
 public class RpnExpressionParser {
 	static final char NUMBERS_SEPARATOR = ' ';

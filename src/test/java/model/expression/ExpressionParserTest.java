@@ -1,7 +1,7 @@
-package controller.expression;
+package model.expression;
 
 import org.junit.jupiter.api.Test;
-import static controller.expression.ExpressionParser.parseExprWithNegativeNumbers;
+import static model.expression.ExpressionParser.parseExprWithNegativeNumbers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExpressionParserTest {

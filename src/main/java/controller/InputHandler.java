@@ -1,14 +1,14 @@
 package controller;
 
 
-import controller.expression.OperationDetector;
-import controller.expression.Operation;
+import model.expression.OperationDetector;
+import model.expression.Operation;
 
 import static controller.ExpressionHandler.clearSpaces;
 import static controller.ExpressionHandler.getPreparedExpression;
 import static controller.ExpressionHandler.getPreparedResult;
-import static controller.expression.ExpressionParser.parseExprWithRomanNumerals;
-import static controller.expression.RomanNumeralParser.arabicNumeralToRoman;
+import static model.expression.ExpressionParser.parseExprWithRomanNumerals;
+import static model.expression.RomanNumeralParser.arabicNumeralToRoman;
 
 public class InputHandler {
     public static final String HINT_MSG = "Неверная команда :( "

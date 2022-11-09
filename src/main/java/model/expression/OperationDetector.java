@@ -1,4 +1,4 @@
-package controller.expression;
+package model.expression;
 
 import java.util.ArrayList;
 import java.util.List;
