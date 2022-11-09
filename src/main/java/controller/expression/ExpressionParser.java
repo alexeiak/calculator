@@ -1,6 +1,6 @@
 package controller.expression;
 
-import static controller.expression.NumeralParser.romanNumeralToArabic;
+import static controller.expression.RomanNumeralParser.romanNumeralToArabic;
 
 public class ExpressionParser {
     public static String parseExprWithNegativeNumbers(String expression) {

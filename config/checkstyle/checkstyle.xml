@@ -64,6 +64,8 @@
         <property name="max" value="120"/>
     </module>
 
+    <property name="tabWidth" value="4" />
+
     <!-- Checks for whitespace                               -->
     <!-- See https://checkstyle.org/config_whitespace.html -->
 <!--    <module name="FileTabCharacter"/>-->
@@ -187,9 +189,9 @@
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 
-<!--        <module name="Indentation">-->
-<!--            <property name="basicOffset" value="4"/>-->
-<!--        </module>-->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+        </module>
 
         <!-- https://checkstyle.org/config_filters.html#SuppressionXpathFilter -->
         <module name="SuppressionXpathFilter">

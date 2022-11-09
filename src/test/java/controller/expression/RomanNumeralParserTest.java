@@ -2,11 +2,11 @@ package controller.expression;
 
 import org.junit.jupiter.api.Test;
 
-import static controller.expression.NumeralParser.arabicNumeralToRoman;
-import static controller.expression.NumeralParser.romanNumeralToArabic;
+import static controller.expression.RomanNumeralParser.arabicNumeralToRoman;
+import static controller.expression.RomanNumeralParser.romanNumeralToArabic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NumeralParserTest {
+public class RomanNumeralParserTest {
 	@Test
 	void romanNumeralToArabicTest() {
 		assertEquals("1", romanNumeralToArabic("I"));

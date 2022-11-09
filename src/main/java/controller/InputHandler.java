@@ -8,7 +8,7 @@ import static controller.ExpressionHandler.clearSpaces;
 import static controller.ExpressionHandler.getPreparedExpression;
 import static controller.ExpressionHandler.getPreparedResult;
 import static controller.expression.ExpressionParser.parseExprWithRomanNumerals;
-import static controller.expression.NumeralParser.arabicNumeralToRoman;
+import static controller.expression.RomanNumeralParser.arabicNumeralToRoman;
 
 public class InputHandler {
     public static final String HINT_MSG = "Неверная команда :( "
